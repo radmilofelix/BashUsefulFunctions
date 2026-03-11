@@ -436,7 +436,6 @@ GetSystemTime()
     mtimeymdThms=$mdateymd"T"$mtimehms
 }
 
-
 PrintSystemTime()
 {
     GetSystemTime
@@ -471,4 +470,11 @@ DisplayElapsedTime() # initialTime (seconds since 01.01.1970)
     local hours=$(($minutes/60))
     local rMinutes=$(($minutes-$hours*60))
     echo "Time elapsed: "$hours" hours, "$rMinutes" minutes, "$rSeconds" seconds."
+}
+
+MailSend_Mutt() # username; recipient; subject; mailbody; attachmenntPath
+{
+    SUBJECT=$3
+    #runuser -l  $USERNAME -c "echo $MAILBODY | mutt $RECIPIENT -s '${SUBJECT}' -a $ATTACHMENT"
+    runuser -l  $1 -c "echo $4 | mutt $2 -s '${SUBJECT}' -a $5"
 }

@@ -1,0 +1,26 @@
+#set ssl_force_tls=yes
+set ssl_starttls=yes
+
+set from = "robot@fml.ro"
+set realname = "Robot FML"
+
+# IMAP settings
+set imap_user = "robot"
+set imap_pass = "6l9@9J+E9bgPiz3Xu/~^nA2kS#Y#&"
+
+# SMTP settings
+# set smtp_url = "smtp://robot@smtp.fml.ro:587"
+set smtp_url = "smtp://$imap_user@smtp.fml.ro:587"
+set smtp_pass = '6l9@9J+E9bgPiz3Xu/~^nA2kS#Y#&'
+
+# disable ssl checks
+unset ssl_verify_host
+set ssl_verify_host = no
+set ssl_verify_dates = no
+
+# Remote folders
+set folder = "imaps://imap.fml.ro/"
+set spoolfile = "+INBOX"
+set postponed = "+[fml]/Drafts"
+set record = "+[fml]/Sent Mail"
+set trash = "+[fml]/Trash"
