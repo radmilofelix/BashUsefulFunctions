@@ -472,9 +472,11 @@ DisplayElapsedTime() # initialTime (seconds since 01.01.1970)
     echo "Time elapsed: "$hours" hours, "$rMinutes" minutes, "$rSeconds" seconds."
 }
 
-MailSend_Mutt() # username; "recipient"; "subject"; "mailbody"; "attachmenntPath"
+MailSend_Mutt() # "username"; "recipient"; "subject"; "mailbody"; "attachmenntPath"
 {
-# Use quotes for the parameter if it has spaces
+# Use quotes for the parameter if it has spaces.
+# If running script as root, first parameter is the username of the sending user.
+# If script is run by user, username does not matter but some string has to be passed as first parameter.
 # mutt must be installed (apt install mutt) and configured for the sending user
 
     param1="$1"
