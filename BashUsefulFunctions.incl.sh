@@ -472,9 +472,32 @@ DisplayElapsedTime() # initialTime (seconds since 01.01.1970)
     echo "Time elapsed: "$hours" hours, "$rMinutes" minutes, "$rSeconds" seconds."
 }
 
-MailSend_Mutt() # username; recipient; subject; mailbody; attachmenntPath
+MailSend_Mutt() # username; "recipient"; "subject"; "mailbody"; "attachmenntPath"
 {
-    SUBJECT=$3
-    #runuser -l  $USERNAME -c "echo $MAILBODY | mutt $RECIPIENT -s '${SUBJECT}' -a $ATTACHMENT"
-    runuser -l  $1 -c "echo $4 | mutt $2 -s '${SUBJECT}' -a $5"
+# Use quotes for the parameter if it has spaces
+# mutt must be installed (apt install mutt) and configured for the sending user
+
+    param1="$1"
+    param2="$2"
+    param3="$3"
+    param4="$4"
+    param5="$5"
+
+    if [[ -n $param5 ]]
+    then
+        if [ "$(whoami)" == "root" ];
+        then
+            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3' -a '$param5'"
+        else
+            echo $param4 | mutt "$param2" -s "$param3" -a "$param5"
+        fi
+    else
+        if [ "$(whoami)" == "root" ];
+        then
+            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3'"
+        else
+            echo $param4 | mutt "$param2" -s "$param3"
+        fi
+    fi
+
 }
