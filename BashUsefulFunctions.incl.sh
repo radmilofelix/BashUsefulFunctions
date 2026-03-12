@@ -489,16 +489,20 @@ MailSend_Mutt() # "username"; "recipient"; "subject"; "mailbody"; "attachmenntPa
     then
         if [ "$(whoami)" == "root" ];
         then
-            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3' -a '$param5'"
+            runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3' -a '$5'"
+#            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3' -a '$param5'"
         else
-            echo $param4 | mutt "$param2" -s "$param3" -a "$param5"
+            echo $param4 | mutt "$2" -s "$3" -a "$5"
+#            echo $param4 | mutt "$param2" -s "$param3" -a "$param5"
         fi
     else
         if [ "$(whoami)" == "root" ];
         then
-            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3'"
+            runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3'"
+#            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3'"
         else
-            echo $param4 | mutt "$param2" -s "$param3"
+            echo $param4 | mutt "$2" -s "$3"
+#            echo $param4 | mutt "$param2" -s "$param3"
         fi
     fi
 }
@@ -507,17 +511,11 @@ MailSend_LocalString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
 {
     # sending mail on the local host
     # mailbody is a string
-    param1="$1"
-    param2="$2"
-    param3="$3"
-    param4="$4"
     if [[ -n $param4 ]]
     then
         echo "$3" | /usr/bin/mail "$1" -s "$2" -A "$4"
-#        echo "$param3" | /usr/bin/mail "$param1" -s "$param2" -A "$param4"
     else
         echo "$3" | /usr/bin/mail "$1" -s "$2"
-#        echo "$param3" | /usr/bin/mail "$param1" -s "$param2"
     fi
 }
 
@@ -525,14 +523,10 @@ MailSend_LocalFile() # "recipient"; "subject"; "mailbodyFilePath"; "attachmenntP
 {
     # sending mail on the local host
     # mailbody is a file
-    param1="$1"
-    param2="$2"
-    param3="$3"
-    param4="$4"
     if [[ -n $param4 ]]
     then
-        /usr/bin/mail "$param1" -s "$param2" -A "$param4" < "$param3"
+        /usr/bin/mail "$1" -s "$2" -A "$4" < "$3"
     else
-        /usr/bin/mail "$param1" -s "$param2" < "$param3"
+        /usr/bin/mail "$1" -s "$2" < "$3"
     fi
 }
