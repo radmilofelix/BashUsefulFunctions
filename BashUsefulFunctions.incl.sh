@@ -479,30 +479,20 @@ MailSend_Mutt() # "username"; "recipient"; "subject"; "mailbody"; "attachmenntPa
 # If script is run by user, username does not matter but some string has to be passed as first parameter.
 # mutt must be installed (apt install mutt) and configured for the sending user
 
-    param1="$1"
-    param2="$2"
-    param3="$3"
-    param4="$4"
-    param5="$5"
-
     if [[ -n $param5 ]]
     then
         if [ "$(whoami)" == "root" ];
         then
             runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3' -a '$5'"
-#            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3' -a '$param5'"
         else
             echo $param4 | mutt "$2" -s "$3" -a "$5"
-#            echo $param4 | mutt "$param2" -s "$param3" -a "$param5"
         fi
     else
         if [ "$(whoami)" == "root" ];
         then
             runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3'"
-#            runuser -l  $param1 -c "echo $param4 | mutt '$param2' -s '$param3'"
         else
             echo $param4 | mutt "$2" -s "$3"
-#            echo $param4 | mutt "$param2" -s "$param3"
         fi
     fi
 }
