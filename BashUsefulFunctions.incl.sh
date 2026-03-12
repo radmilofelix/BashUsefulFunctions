@@ -503,8 +503,9 @@ MailSend_Mutt() # "username"; "recipient"; "subject"; "mailbody"; "attachmenntPa
     fi
 }
 
-MailSend_localString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
+MailSend_LocalString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
 {
+    # sending mail on the local host
     # mailbody is a string
     param1="$1"
     param2="$2"
@@ -515,5 +516,21 @@ MailSend_localString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
         echo "$param3" | /usr/bin/mail "$param1" -s "$param2" -A "$param4"
     else
         echo "$param3" | /usr/bin/mail "$param1" -s "$param2"
+    fi
+}
+
+MailSend_LocalFile() # "recipient"; "subject"; "mailbodyFilePath"; "attachmenntPath"
+{
+    # sending mail on the local host
+    # mailbody is a file
+    param1="$1"
+    param2="$2"
+    param3="$3"
+    param4="$4"
+    if [[ -n $param4 ]]
+    then
+        /usr/bin/mail "$param1" -s "$param2" -A "$param4" < "$param3"
+    else
+        /usr/bin/mail "$param1" -s "$param2" < "$param3"
     fi
 }
