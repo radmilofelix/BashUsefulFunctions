@@ -483,14 +483,14 @@ MailSend_Mutt() # "username"; "recipient"; "subject"; "mailbody"; "attachmenntPa
     then
         if [ "$(whoami)" == "root" ];
         then
-            runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3' -a '$5'"
+            runuser -l  $1 -c "echo $4 | mutt '$2' -s '$3' -a '$5'"
         else
             echo $4 | mutt "$2" -s "$3" -a "$5"
         fi
     else
         if [ "$(whoami)" == "root" ];
         then
-            runuser -l  $param1 -c "echo $4 | mutt '$2' -s '$3'"
+            runuser -l  $1 -c "echo $4 | mutt '$2' -s '$3'"
         else
             echo $4 | mutt "$2" -s "$3"
         fi
