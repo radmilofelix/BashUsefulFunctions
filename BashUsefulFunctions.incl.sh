@@ -501,7 +501,7 @@ MailSend_LocalString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
 {
     # sending mail on the local host
     # mailbody is a string
-    if [[ -n $param4 ]]
+    if [[ -n $4 ]]
     then
         echo "$3" | /usr/bin/mail "$1" -s "$2" -A "$4"
     else
@@ -513,7 +513,7 @@ MailSend_LocalFile() # "recipient"; "subject"; "mailbodyFilePath"; "attachmenntP
 {
     # sending mail on the local host
     # mailbody is a file
-    if [[ -n $param4 ]]
+    if [[ -n $4 ]]
     then
         /usr/bin/mail "$1" -s "$2" -A "$4" < "$3"
     else
