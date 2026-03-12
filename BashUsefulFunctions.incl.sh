@@ -513,9 +513,11 @@ MailSend_LocalString() # "recipient"; "subject"; "mailbody"; "attachmenntPath"
     param4="$4"
     if [[ -n $param4 ]]
     then
-        echo "$param3" | /usr/bin/mail "$param1" -s "$param2" -A "$param4"
+        echo "$3" | /usr/bin/mail "$1" -s "$2" -A "$4"
+#        echo "$param3" | /usr/bin/mail "$param1" -s "$param2" -A "$param4"
     else
-        echo "$param3" | /usr/bin/mail "$param1" -s "$param2"
+        echo "$3" | /usr/bin/mail "$1" -s "$2"
+#        echo "$param3" | /usr/bin/mail "$param1" -s "$param2"
     fi
 }
 
